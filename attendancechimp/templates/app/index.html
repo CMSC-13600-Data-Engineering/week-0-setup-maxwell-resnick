@@ -1,13 +1,19 @@
 <!-- templates/home.html -->
-{% extends 'base.html' %}
+<center>{% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
-
-{% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %}
-{% endblock %}
+  {% block title %}Home{% endblock %}
+  
+  {% block content %}
+  Hello! My name is Maxwell Resnick and I am a sophomore at the University of Chicago. I am originally from Pelham, New York. I am a double-major in Data Science and Business Economics and I cannot wait to learn more about software development!
+  
+  Hello! My name is Hayden Leiderman and I am also a sophomore at the University of Chicago. I am originally from Roslyn, New York. I am also planning on double-majoring in Data Science and Business Economics.
+  {% endblock %}
+  
+  {% block content %}
+  {% if user.is_authenticated %}
+    Hi {{ <b><mark>user.username</mark></b> }}!
+  {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+  {% endif %}
+  {% endblock %}</center>
