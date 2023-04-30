@@ -9,12 +9,16 @@ class Course(models.Model):
 
 #this class records data on whether the user is an instructor or student
 class User(models.Model):
-    course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
     USER_TYPES = [
         ('Instructor'),
         ('Student'),
         ]
     type_user = models.CharField(max_length=10, choices=USER_TYPES)
+
+#create a seperate enrollment table that maps user and course
+class Enrollment(models.Model):
+    user_id = models.CharField(max_length=100)
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
 
 #this class records data on the instructor, instructor's QR code, and time of generation
 class Instructor_QR(models.Model):
@@ -28,3 +32,10 @@ class Student_QR(models.Model):
     student_name = models.CharField(max_length=100) 
     student_qr = models.ImageField(upload_to ='uploads/')
     upload_time = models.TimeField() 
+
+
+
+
+#def new():
+
+#def create()
