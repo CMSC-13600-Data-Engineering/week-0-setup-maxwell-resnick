@@ -1,0 +1,47 @@
+<form method="POST" action="handleAttendanceForm">
+
+    {% load static %}
+
+    {% csrf_token %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random QR Code Generator</title>
+	<style>
+		#qr-code {
+			display: block;
+			margin: 0 auto;
+			width: 200px;
+			height: 200px;
+			background-color: white;
+			border: 2px solid black;
+			border-radius: 10px;
+			padding: 10px;
+			box-shadow: 5px 5px 10px grey;
+		}
+	</style>
+</head>
+<body>
+	<h1>Random QR Code Generator</h1>
+	<p>Click the button below to generate a new random QR code:</p>
+	<button onclick="generateQR()">Generate QR Code</button>
+	<div id="qr-code"></div>
+	<script src="{% static 'qrcode.js' %}"></script>
+	<script>
+		function generateQR() {
+			var randomText = Math.random().toString(36).substring(2, 8); // Generate a random string
+			var qr = new QRious({
+				element: document.getElementById('qr-code'),
+				value: randomText,
+				size: 200
+			});
+		}
+	</script>
+    <div id='ele_qrcode'/>
+    <script type="text/javascript">
+        qr_code = new QRCode(document.getElementById('ele_qrcode'))
+        qr_code.makeCode("123")
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!-- This is an HTML Form. Forms can be used to generate POST requests from your browser -->
+
+<form method="post" action="handleUserForm">
+
+    <!-- This is a token the prevents outside websites from generating POST requests -->
+    {% csrf_token %}
+  
+  
+    <!-- This is the actual form -->
+    <label for="name">Name:</label><br>
+    <input type="text" name="name" ><br>
+  
+    <label for="user_id">User ID:</label><br>
+    <input type="text" name="user_id" ><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" name="email"><br>
+  
+    <label for="user_type">Select an option:</label>
+    <select id="user_type" name="user_type">
+      <option value="student">Student</option>
+      <option value="instructor">Instructor</option>
+    </select><br>
+    
+    <label for="password">Password:</label><br>
+    <input type="text" name="password"><br>
+  
+    <input type="submit" value="Submit">
+  </form>
+  
+  {{error}}

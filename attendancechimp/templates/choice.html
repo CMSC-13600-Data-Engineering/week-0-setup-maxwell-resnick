@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<form method="post" action="handleChoiceForm">
+    {% csrf_token %}
+
+<html>
+<head>
+  <title>Button Example</title>
+</head>
+<body>
+  <h1>Button Example</h1>
+  <div>
+    <button onclick="joinCourse()">Join Course</button>
+    <button onclick="uploadQR()">Upload QR</button>
+  </div>
+  <script>
+    function joinCourse() {
+      // Add the logic for joining a course
+      // You can redirect to the join course page or handle it via AJAX request
+      alert("Join Course button clicked!");
+    }
+
+    function uploadQR() {
+      // Add the logic for uploading a QR code
+      // You can redirect to the upload QR page or handle it via AJAX request
+      alert("Upload QR button clicked!");
+    }
+  </script>
+</body>
+</html>
