@@ -21,5 +21,8 @@ As you add more functionality to the application, testing becomes much harder. W
 
 Hint: think about how to write scripts that generate fake data to add to the database.
 
+
+Plan for testing: Our tests.py file will include a series of test cases. It will begin with the UserTests class, which will focus on testing user creation. We will generate fake data through the faker library, and in this case, we will create new users. We will verify that users are not "None" and that their attributes line up correctly with the generated data. The CourseTests class will test the creation of a course. Once again, fake data will be generated for course details, and the createCourse function will be used to create a course. The test will retrieve the course from the database and ensure it is not "None", while also verifying that the course's attributes align with the generated data. In the EnrollmentTests class, we will test the enrollment count for a course. We will set up three users (an instructor and two students) and a course using the setUp method. The test will then retrieve the enrollments for the course and check that the count matches the expected value. Lastly, the InstructorQRTests class will focus on testing the creation of an instructor QR record. It will set up a course and an instructor QR record and retrieve the instructor QR record from the database, ensuring once again that it is not "None".
+
 ## Step 4. Implement (Step 3)
 Implement Step 3 in code and include the results with your submitted pull request. 
