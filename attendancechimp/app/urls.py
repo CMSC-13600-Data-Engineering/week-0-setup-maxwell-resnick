@@ -26,9 +26,11 @@ urlpatterns = [
 
     path('attendance', views.newAttendanceForm), 
     path('handleAttendanceForm', views.handleAttendanceForm),
-    path('attendance/<str:course_id>/', views.handleAttendanceForm, name='attendance')
+    path('attendance/<str:course_id>/', views.handleAttendanceForm, name='attendance'),
     #path('join/<str:course_id>/', views.join_course, name='join_course'),
 
+    path('class_summary', views.class_summary),
+    path('student_stats', views.student_stats)
 
 ]
 

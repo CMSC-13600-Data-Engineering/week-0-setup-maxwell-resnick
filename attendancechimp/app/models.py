@@ -43,8 +43,7 @@ class Student_QR(models.Model):
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
     student_id = models.CharField(max_length=100) 
     student_qr = models.FileField(upload_to ='uploads/')
-    upload_time = models.TimeField() 
-
+    upload_time = models.TimeField()  
 
 import logging
 

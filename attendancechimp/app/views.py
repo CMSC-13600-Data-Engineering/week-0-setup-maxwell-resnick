@@ -135,6 +135,8 @@ def login_view(request):
             return render(request, 'join.html')
         elif objective == 'upload':
             return render(request, 'upload.html')
+        elif objective == 'class_summary':
+            return render(request, 'class_summary.html')
         else:
             return render(request, 'attendance.html')
     else:
@@ -202,3 +204,68 @@ def handleAttendanceForm(request):
     return render(request, 'attendance.html', context)
 
     return render(request, 'attendance.html', context)
+
+def class_summary(request):
+    # Get the class object
+    course_obj = Enrollment.objects.get(course_id=course_id)
+    
+    # Get all the students in the class
+    students = Enrollment.objects.filter(course=course_obj)
+    
+    # Get the total number of students in the class
+    total_students = students.count()
+    
+    # Get all the meetings for the class
+    meetings = Instructor_QR.objects.filter(course=course_obj).values('generation_time').annotate(total=Count('generation_time'))
+    
+    meeting_stats = []
+    for meeting in meetings:
+        # Get the number of students with images uploaded for the meeting
+        students_with_images = Student_QR.filter(image__isnull=False, meeting=meeting).count()
+        
+        # Calculate the fraction of students with images uploaded for the meeting
+        fraction_with_images = students_with_images / total_students if total_students > 0 else 0
+        
+        # Add meeting statistics to the list
+        meeting_stats.append({
+            'meeting_date': meeting.date,
+            'fraction_with_images': fraction_with_images
+        })
+    
+    context = {
+        'class_name': class_obj.name,
+        'total_students': total_students,
+        'meeting_stats': meeting_stats
+    }
+    
+    return render(request, 'class_summary.html', context)
+
+
+def student_stats(request):
+    course_id = request.GET.get('course_id')
+    course = get_object_or_404(Course, code=course_id)
+
+    class_meetings = Instructor_QR.objects.filter(course=course_id).values('generation_time').annotate(total=Count('generation_time'))
+    students = Enrollment.objects.filter(course=course_id)
+
+    student_stats = []
+    for student in students:
+        meeting_stats = []
+        for meeting in class_meetings:
+            has_uploaded_image = Student_QR.objects.filter(student=student_id, class_meeting=meeting).exists()
+            meeting_stats.append({
+                'meeting': meeting,
+                'has_uploaded_image': has_uploaded_image
+            })
+
+        student_stats.append({
+            'student': student,
+            'meeting_stats': meeting_stats
+        })
+
+    context = {
+        'course': course,
+        'student_stats': student_stats
+    }
+
+    return render(request, 'student_stats.html', context)

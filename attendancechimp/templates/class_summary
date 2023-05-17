@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Class Summary</title>
+</head>
+<body>
+    <h1>{{ class_name }}</h1>
+    <p>Total number of students: {{ total_students }}</p>
+    
+    <h2>Meeting Statistics:</h2>
+    <ul>
+        {% for meeting in meeting_stats %}
+            <li>
+                <p>Meeting date: {{ meeting.meeting_date }}</p>
+                <p>Fraction of students with images uploaded: {{ meeting.fraction_with_images }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

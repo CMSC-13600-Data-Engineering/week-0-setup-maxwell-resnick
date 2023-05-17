@@ -1,0 +1,30 @@
+<form method="post" action="student_stats">
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Stats</title>
+</head>
+<body>
+    <h1>Class Summary</h1>
+    <h2>Course: {{ course.code }} - {{ course.name }}</h2>
+
+    <table>
+        <tr>
+            <th>Student</th>
+            {% for meeting in course.class_meetings.all %}
+                <th>{{ meeting.date }}</th>
+            {% endfor %}
+        </tr>
+        
+        {% for student_stat in student_stats %}
+            <tr>
+                <td>{{ student_stat.student.name }}</td>
+                {% for meeting_stat in student_stat.meeting_stats %}
+                    <td>{% if meeting_stat.has_uploaded_image %}Uploaded{% else %}Not Uploaded{% endif %}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
